@@ -45,7 +45,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // 1. N+1 Prevention - Prevent lazy loading in non-production environments
         if (config('safety.prevent_lazy_loading.enabled', true)) {
-            Model::preventLazyLoading(!$this->app->isProduction());
+            Model::preventLazyLoading(! $this->app->isProduction());
 
             // In production, log lazy loading violations instead of throwing exceptions
             if ($this->app->isProduction() && config('safety.prevent_lazy_loading.log_violations_in_production', true)) {
@@ -58,12 +58,12 @@ class AppServiceProvider extends ServiceProvider
 
         // 2. Partially Hydrated Model Protection - Prevent accessing missing attributes
         if (config('safety.prevent_missing_attributes', true)) {
-            Model::preventAccessingMissingAttributes(!$this->app->isProduction());
+            Model::preventAccessingMissingAttributes(! $this->app->isProduction());
         }
 
         // 3. Model Strictness - Prevent silently discarding fillable attributes
         if (config('safety.prevent_silently_discarding_attributes', true)) {
-            Model::preventSilentlyDiscardingAttributes(!$this->app->isProduction());
+            Model::preventSilentlyDiscardingAttributes(! $this->app->isProduction());
         }
 
         // 4. Polymorphic Mapping Enforcement - Enforce morph map to avoid storing FQCNs
@@ -106,7 +106,7 @@ class AppServiceProvider extends ServiceProvider
                 Log::warning("An individual database query exceeded {$individualThreshold}ms.", [
                     'sql' => $query->sql,
                     'bindings' => $query->bindings,
-                    'time' => $query->time
+                    'time' => $query->time,
                 ]);
             }
         });
@@ -128,7 +128,7 @@ class AppServiceProvider extends ServiceProvider
                     Log::warning("A command took longer than {$commandThreshold}ms.", [
                         'command' => $input->getArguments(),
                         'status' => $status,
-                        'started_at' => $startedAt
+                        'started_at' => $startedAt,
                     ]);
                 }
             );
@@ -141,7 +141,7 @@ class AppServiceProvider extends ServiceProvider
                         'url' => $request->fullUrl(),
                         'method' => $request->method(),
                         'status' => $response->getStatusCode(),
-                        'started_at' => $startedAt
+                        'started_at' => $startedAt,
                     ]);
                 }
             );

@@ -13,10 +13,10 @@ Route::get('/test-horizon', function () {
     for ($i = 1; $i <= 5; $i++) {
         TestHorizonJob::dispatch("Test job #{$i}");
     }
-    
+
     return response()->json([
         'message' => '5 test jobs dispatched to Horizon!',
-        'horizon_url' => url('/horizon')
+        'horizon_url' => url('/horizon'),
     ]);
 });
 

@@ -104,4 +104,4 @@ return [
     |
     */
     'prevent_stray_requests_in_tests' => env('PREVENT_STRAY_REQUESTS_IN_TESTS', true),
-]; 
+];

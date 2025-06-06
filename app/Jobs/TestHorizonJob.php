@@ -25,8 +25,8 @@ class TestHorizonJob implements ShouldQueue
     {
         // Simulate some work
         sleep(2);
-        
+
         // Log the message
-        logger()->info('TestHorizonJob executed: ' . $this->message);
+        logger()->info('TestHorizonJob executed: '.$this->message);
     }
 }
