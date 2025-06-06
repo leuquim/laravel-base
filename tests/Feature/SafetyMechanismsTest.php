@@ -5,13 +5,14 @@ namespace Tests\Feature;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class SafetyMechanismsTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function it_prevents_stray_http_requests_by_default()
     {
         // This should throw an exception because stray requests are prevented
@@ -20,7 +21,7 @@ class SafetyMechanismsTest extends TestCase
         Http::get('https://httpbin.org/get');
     }
 
-    /** @test */
+    #[Test]
     public function it_allows_http_requests_when_explicitly_enabled()
     {
         // Allow stray requests for this test
@@ -37,7 +38,7 @@ class SafetyMechanismsTest extends TestCase
         $this->assertEquals(['success' => true], $response->json());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_fake_specific_requests()
     {
         // Fake specific requests
@@ -53,7 +54,7 @@ class SafetyMechanismsTest extends TestCase
         $this->assertEquals(['user' => 'test'], $response2->json());
     }
 
-    /** @test */
+    #[Test]
     public function safety_configuration_is_loaded()
     {
         // Test that our safety configuration is properly loaded
